@@ -13,25 +13,22 @@ struct TreeNode
         left = right = NULL;
     }
 };
-int Modified_height_function(TreeNode *root)
+int height(TreeNode *root, int &diameter)
 {
     if (root == NULL)
         return 0;
-    int lh = Modified_height_function(root->left);
-    if (lh == -1)
-        return -1;
-    int rh = Modified_height_function(root->right);
-    if (rh == -1)
-        return -1;
-
-    if (abs(lh - rh) > 1)
-        return -1;
+    int lh = height(root->left, diameter);
+    int rh = height(root->right, diameter);
+    diameter = max(diameter, lh + rh);
     return 1 + max(lh, rh);
 }
-bool idBalanced(TreeNode *root)
+int findDiameter(TreeNode *root)
 {
-    return Modified_height_function(root) != -1;
+    int d = 0;
+    height(root, d);
+    return d;
 }
+
 int main()
 {
     // Example usage:
@@ -41,4 +38,5 @@ int main()
     root->right = new TreeNode(3);
     root->left->left = new TreeNode(4);
     root->left->right = new TreeNode(5);
+    cout<<findDiameter(root);
 }
