@@ -20,7 +20,7 @@ int maxPathSum(TreeNode *root, int &maxi)
     int maxLeft = maxPathSum(root->left, maxi);
     int maxRight = maxPathSum(root->right, maxi);
     maxi = max(maxi, maxLeft + maxRight + root->data);
-    return root->data + max(maxLeft ,maxRight);
+    return root->data + max(maxLeft, maxRight);
 }
 int callerFunction(TreeNode *root)
 {
